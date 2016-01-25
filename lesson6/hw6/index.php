@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<? $discounts = array('Турция' => "4", 'Египет' => "3", 'Италия' => "10"); ?>
+	<? $discounts = array('Турция' => "5", 'Египет' => "3", 'Италия' => "15", 'Испания' => "12", 'Куба' => "8"); ?>
 
     <form action="" method="post">
 	
@@ -26,7 +26,7 @@
 		</p>
 		
 		<p>Введите количество дней:
-			<input type="text"name="days" size="1" maxlength="2">
+			<input type="text"name="days" size="1" maxlength="2" placeholder="<?=$_REQUEST['days']?>">
 		</p>
 		
 		<p>Если Вы студент, нажмите, чтобы получить скидку -5%
@@ -38,37 +38,33 @@
     </form>
 
 	<? function calculate(){
-		//$discounts = array('Турция' => "4", 'Египет' => "3", 'Италия' => "10");
-
+		
+		global $discounts;
+		
 		$country = $_REQUEST['country'];
 		$days = $_REQUEST['days'];
-
 		if (isset($_REQUEST['checkbox'])){
 			$checkbox = $_REQUEST['checkbox'];
 		}
-		else {$checkbox = 'off';}
 
 		$price = "400";
 		$cost = $price*$days;
 
-		switch ($country) {
-			case "Турция":
-				$cost = $cost*(1+$discounts['Турция']/100);
-				break;
-			case "Египет":
-				$cost = $cost*(1+$discounts['Египет']/100);
-				break;
-			case "Италия":
-				$cost = $cost*(1+$discounts['Италия']/100);
-				break;
+		foreach($discounts as $key => $value){
+			if($key == $country){
+				$cost = $cost*(1+$value/100);
+			}
 		}
 
-		if ($checkbox = 'on'){
-			$cost = $cost*0.95;
+		if ($checkbox == 'on'){
+			$cost *=0.95;
 		}
-		echo "<br> ВАШ ТУР: <br> Страна: ", $country, "<br>", "Длительность (дней): ",$days,"<br>", "Стоимость (грн): ", $cost;
+		
+		if ((!empty($_REQUEST['country'])) and (!empty($_REQUEST['days']))){
+			echo "<br> ВАШ ТУР: <br> Страна: ", $country, "<br>", "Длительность (дней): ",$days,"<br>", "Стоимость (грн): ", $cost;
+		}
 	}
-
+	
 	calculate();
 	?>
 </body>
