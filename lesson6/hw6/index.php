@@ -9,7 +9,19 @@
 </head>
 <body>
 
-	<? $discounts = array('Турция' => "5", 'Египет' => "3", 'Италия' => "15", 'Испания' => "12", 'Куба' => "8"); ?>
+	<?
+	$path = 'file.txt';
+	if (file_exists($path)) {
+		$FileStrings = file($path);
+		foreach($FileStrings as $Strings){
+			$ArStr = explode(':',$Strings);
+			$discounts[$ArStr[0]] = $ArStr[1];
+		}
+	} else {
+		echo "<br>The file $path does not exist<br>";
+	}
+
+	//$discounts = array('Турция' => "5", 'Египет' => "3", 'Италия' => "15", 'Испания' => "12", 'Куба' => "8"); ?>
 
     <form action="" method="post">
 	
