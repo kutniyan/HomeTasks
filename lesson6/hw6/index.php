@@ -23,7 +23,7 @@
 
 	//$discounts = array('Турция' => "5", 'Египет' => "3", 'Италия' => "15", 'Испания' => "12", 'Куба' => "8"); ?>
 
-    <form action="" method="post">
+    <form action="feedback.php" method="post" id="index">
 	
 		<p>Выберите страну:
 			<select name="country">
@@ -49,35 +49,27 @@
 		<button type="reset" >Сброс</button>
     </form>
 
-	<? function calculate(){
-		
-		global $discounts;
-		
-		$country = $_REQUEST['country'];
-		$days = $_REQUEST['days'];
-		if (isset($_REQUEST['checkbox'])){
-			$checkbox = $_REQUEST['checkbox'];
-		}
+	<div id="res"></div>
 
-		$price = "400";
-		$cost = $price*$days;
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#index').submit(function(e){
+				e.preventDefault();
+				var formData = $(this).serializeArray();
+				console.log(formData);
+				$.ajax({
+					url: "feedback.php",
+					type: 'post',
+					data: formData,
+					datatype: 'html',
+					success: function(res){
+						$('#res').html(res);
+					}
+				});
+			});
+		});
+	</script>
 
-		foreach($discounts as $key => $value){
-			if($key == $country){
-				$cost = $cost*(1+$value/100);
-			}
-		}
-
-		if ($checkbox == 'on'){
-			$cost *=0.95;
-		}
-		
-		if ((!empty($_REQUEST['country'])) and (!empty($_REQUEST['days']))){
-			echo "<br> ВАШ ТУР: <br> Страна: ", $country, "<br>", "Длительность (дней): ",$days,"<br>", "Стоимость (грн): ", $cost;
-		}
-	}
-	
-	calculate();
-	?>
 </body>
 </html>
