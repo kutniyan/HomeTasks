@@ -77,8 +77,7 @@ function sum($n){
         echo $sum;
         return;
     }
-
-    return $n;
+    return;
 }
 
 sum(213);
@@ -96,7 +95,7 @@ function reverse($n){
         $n = ($n - $n%10)/10;
         reverse($n);
     }
-    return $n;
+    return;
 }
 
 reverse(123);
@@ -110,10 +109,23 @@ function reverse2($n){
         $n = ($n - $n%10)/10;
         reverse2($n);
     }
-    global $b;
-    $b = $a;
-    return $n;
+    return $a;
 }
 
-reverse2(156);
-echo $b;
+echo reverse2(156);
+
+echo '<br><br> ЗАДАЧА G. -----------------------------------------------------------<br>';
+/*Дано натуральное число N. Выведите все его цифры по одной, в обычном порядке, разделя
+их пробелами или новыми строками. При решении этой задачи нельзя использовать строки, списки,
+массивы (ну и циклы, разумеется). Разрешена только рекурсия и целочисленная арифметика.*/
+
+function separate($n){
+	if($n < 10){
+		return;
+	}
+	$n = ($n - $n%10)/10;
+	separate($n);
+	echo $n%10;
+	echo '&nbsp';
+}
+separate(258);
