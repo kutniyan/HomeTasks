@@ -100,7 +100,7 @@ function reverse($n){
 
 reverse(123);
 
-echo '<br><br> ЗАДАЧА F (ВАРИАНТ 2). -------------------------------<br><br>';
+echo '<br><br> ЗАДАЧА U. -------------------------------<br><br>';
 
 function reverse2($n){
     if($n >= 1){
