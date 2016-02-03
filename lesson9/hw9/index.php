@@ -154,3 +154,24 @@ function simple($n){
 }
 
 echo simple(11);
+
+echo '<br><br> ЗАДАЧА I. -------------------------------<br><br>';
+/*Дано натуральное число n>1. Выведите все простые множители этого числа в порядке
+неубывания с учетом кратности. Алгоритм должен иметь сложность O(logn)*/
+
+function multiplier($n){
+	static $z = 2;
+	if($n >= $z){
+		if($n%$z == 0){
+			echo $z;
+			echo '&nbsp';
+			$n = $n/$z;
+		}
+		if($n%$z != 0){
+			$z++;
+		}		
+		multiplier($n);		
+	}
+}
+
+echo multiplier(18);
