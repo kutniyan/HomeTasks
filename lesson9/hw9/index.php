@@ -179,3 +179,25 @@ function multiplier($n){
 }
 
 echo multiplier(18);
+
+echo '<br><br> ЗАДАЧА J. -------------------------------<br><br>';
+/*Дано слово, состоящее только из строчных латинских букв. Проверьте, является ли это
+слово палиндромом. Выведите YES или NO. При решении этой задачи нельзя пользоваться
+циклами, в решениях на питоне нельзя использовать срезы с шагом, отличным от 1.*/
+
+function palindrom($str){
+	static $a = 0;
+	$z = (strlen($str) - 1 - $a);
+	static $res = true;
+	if($a < $z){
+		if($str[$a] != $str[$z]){
+			$res *= false;
+		}
+		$a++;
+		palindrom($str);
+	}
+	return $res;
+}
+
+echo palindrom('radar');
+
